@@ -444,3 +444,11 @@ ul{
 .warning-btn:hover{
     background-color: red;
 }
+
+.info-btn-1{
+    background-color:darkgreen
+}
+
+.info-btn-1:hover{
+    background-color:rgb(9, 214, 9)
+}

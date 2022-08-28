@@ -1,5 +1,7 @@
 (function($) {
 
+
+
   $("#btnExport_excel").click(function() {
     let today = new Date()
 
@@ -52,16 +54,17 @@
             return true
         }
     };
-    margins = {
-        top: 80,
-        bottom: 60,
-        left: 40,
-        width: 522
-    };
+    margins = {  
+      top: 150,  
+      bottom: 60,  
+      left: 40,  
+      right: 40,  
+      width: 600  
+  }; 
     // all coords and widths are in jsPDF instance's declared units
     // 'inches' in this case
 
-    pdf.fromHTML(
+/*     pdf.fromHTML(
         cln_source2, // HTML string or DOM elem ref.
         margins.left, // x coord
         margins.top, { // y coord
@@ -74,7 +77,90 @@
             //          this allow the insertion of new lines after html
             pdf.save('Test.pdf');
         }, margins
-    );
+    ); */
+
+    const table = document.querySelector('table')
+
+    var columns = []
+
+    var data = []
+
+
+    for (var i = 0, row; row = table.rows[i]; i++) {
+      var arrayData = []
+      //iterate through rows
+      //rows would be accessed using the "row" variable assigned in the for loop
+      for (var j = 0; j < 5 ; j++) {
+        
+        var col = row.cells[j]
+        if(i == 0) {
+          columns.push(col.innerHTML)
+        }else{
+          arrayData.push(col.innerHTML)
+        }
+        //console.log(col.innerHTML);
+      }  
+
+      if(arrayData.length > 0){
+        data.push(arrayData)
+      }
+   }
+
+
+
+
+    pageHeight = pdf.internal.pageSize.height; 
+    
+
+    var y = 5;
+    pdf.setLineWidth(10);
+    pdf.text(50, y = y + 20, "Student List");
+    
+
+    pdf.autoTable(columns,data,{
+      startY: false,
+      theme: 'plain',
+      tableWidth: '500',
+      columnWidth: 'wrap',
+      showHead: 'everyPage',
+      tableLineColor: 200,
+      tableLineWidth: 0,
+      columnStyles: {
+          0: {
+            cellWidth: 100
+          },
+          1: {
+            cellWidth: 100
+          },
+          2: {
+            cellWidth: 100
+          },
+          3: {
+            cellWidth: 100
+          },
+          4: {
+            cellWidth: 100
+          },
+          5: {
+            cellWidth: 100
+          },
+      },
+      headStyles: {
+          theme: 'grid'
+      },
+      styles: {
+          overflow: 'linebreak',
+          cellWidth: 'wrap',
+          font: 'arial',
+          fontSize: 12,
+          cellPadding: 8,
+          overflowColumns: 'linebreak'
+      },
+  }); 
+
+  pdf.save('Test.pdf');
+
+
   });
   
 
