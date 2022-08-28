@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <div class="dashboard-container">
+        <div class="top-nav">
+        <h1><a href="{% url 'dashboard' %}">WESTSIDE SCHOOL</a></h1>
+        <p><a href="{% url 'dashboard' %}">Dashboard</a></p>
+        </div>
+        <div class="top-header">
+            <div>Welcome {{ user.username }} !</div>
+            <div class="logout-p"><a href="{% url 'logout' %}">Log out</a></div>        
+        </div>
+
+
+        <div class="dashboard-content">
+            <div class="graph-div"></div>
+            <div class="widget-div">
+                <a href="{% url 'students' %}"><div class="widget">Students</div></a>
+            </div>
+        </div>
+
+    </div>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Login</a> |  
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,446 @@
+body{
+    background-image: url(../img/school-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+a{
+    text-decoration: none;
+    color: black
+}
+
+ul{
+    list-style: none;
+}
+
+.row{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.home-container{
+    max-width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-container h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.btn-group{
+    width: 100%;
+    text-align: center;
+}
+
+.btn-group button{
+    padding: 10px 18px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-size: 18px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: 0.7s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-group-1{
+    background-color: #0CAFFF;
+    padding: 10px 40px !important;
+}
+
+.btn-group-1:hover{
+    background-color: #7FFFD4;
+
+}
+
+.btn-group-2{
+    background-color: #0CAFFF;
+}
+
+.btn-group-2:hover{
+    background-color: #6699CC;
+
+}
+
+
+.login-container{
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading-div{
+    text-align: center;
+    margin-top: 5%;    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.top-head-p{
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.sub-heading{
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.sub-heading a{
+    color: brown;
+}
+
+.form-div-1{
+    width: 100%;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.input-fields {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: #B9D9EB;
+}
+
+.btn-primary{
+    padding: 8px 16px;
+    background-color: #0047AB;
+    color: white;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.7s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover{
+    background-color: #041E42;
+}
+
+.signup-heading-1{
+    text-transform: uppercase;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+
+
+.arrow-img,.arrow-img-1 {
+    background-image: url(../img/left-arrow.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    color: black;
+    margin: 2% 0 0 5%;
+    cursor: pointer;
+}
+
+.arrow-img-1{
+    margin: 2% 0 0 0% !important;
+}
+
+.dashboard-container{
+    max-width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.dashboard-container h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 4% 0 0 0;
+}
+
+.top-header{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+    margin: 5% 0 5% 0;
+}
+
+.top-header div {
+    width: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.logout-p{
+    text-align: right;
+}
+
+.widget{
+    width: 100px;
+    height: 100px;
+    background-color: #013988;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 75px;
+    cursor: pointer;
+}
+
+.top-nav p{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.active-link{
+    color: tomato;
+}
+
+.btn-primary-wd{
+    margin: 2% 0 3% 0 !important;
+}
+
+.add-div{
+    text-align: right;
+}
+
+
+/* Table styles */
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.table-container{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+    background: rgba( 71, 147, 227, 1);
+}
+.table-container h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+
+
+
+/* modal */
+.modal {
+    display: none; 
+    position: fixed; 
+    padding-top: 50px;
+    left: 0; 
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .modal-content {
+    position: relative; 
+    background-color: white; 
+    /* backdrop-filter: blur(5px); */
+    padding: 40px; 
+    margin: auto; 
+    width: 35%;  
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    border-radius: 10px;
+    /* border: 1px solid black; */
+  }
+  .close-btn {
+    float: right; 
+    color: lightgray; 
+    font-size: 24px;  
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  .close-btn:hover {
+    color: red;
+  }
+  @-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+
+  
+.payment-form{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 3%;
+}
+
+
+.payment-form input{
+    padding: 1%;
+    border: 1px solid black;
+    font-size: 18px;
+    margin-bottom: 0%;
+}
+
+.payment-form input:focus{
+    outline: none;
+}
+
+.payment-form input::placeholder{
+    color: #999;
+}
+
+.payment-form button{
+    padding: 8px 14px;
+    background-color: orange;
+    text-align: center;
+}
+
+.modal-form h2{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.warning-btn{
+    background-color: tomato;
+}
+
+.warning-btn:hover{
+    background-color: red;
+}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Students{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="top-nav">
+        <h1><a href="{% url 'dashboard' %}">WESTSIDE SCHOOL</a></h1>
+        <p><a href="{% url 'dashboard' %}">Dashboard</a>/<a href="{% url 'students' %}" class="active-link">Students</a></p>
+    </div>
+
+    <div class="add-div">
+        <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Add Student</button></a>
+    </div>
+
+    <div class="table-wrapper" id="student_table_div">
+        <table class="fl-table" id="table2excel">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Year</th>
+                    <th>Course</th>
+                    <th class="excludeThisClass"></th>
+                    <th class="excludeThisClass"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in objects %}
+                    <tr>
+                        <th>{{ student.student_id }}</th>
+                        <th>{{ student.first_name }}</th>
+                        <th>{{ student.last_name }}</th>
+                        <th>{{ student.year }}</th>
+                        <th>{{ student.course }}</th>
+                        <th class="excludeThisClass"><a href="{% url 'student_edit' student.pk %}">edit</a></th>
+                        <th class="excludeThisClass"><a href="{% url 'student_delete' student.pk %}">del</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <button id="btnExport_excel">export to excel</button>
+    <button id="btnExport_pdf">export to pdf</button>
+
+
+    <!-- modal -->
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-form">
+                <h2>Add Student</h2>
+            <form method="post" class="payment-form">
+                {% csrf_token %}
+                {% for field in form %}
+                <p class="error-paragraph">{{ field.errors }}</p>
+                <input
+                id="{{ field.id_for_label }}" maxlength="255"
+                name="{{ field.html_name }}" value="{{ field.intial }}" 
+                type="{{ field.field.widget.input_type }}"
+                placeholder="{{ field.label }}">
+                {% endfor %}
+
+                <button type="submit" class="btn-primary" value="save">Submit</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+{% endblock content %}

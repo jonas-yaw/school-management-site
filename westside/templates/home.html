@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+    <div class="home-container">
+        <h1>WESTSIDE SCHOOL</h1>
+
+        <div class="btn-group">
+            <button class="btn-group-1"><a href="{% url 'login' %}">sign in</a></button>
+            <button class="btn-group-2"><a href="{% url 'signup' %}">create an account</a></button>
+        </div>
+    </div>
+{% endblock content %}  

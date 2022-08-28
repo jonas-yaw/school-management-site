@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+    <div class="container col">
+        <div class="arrow-div">
+            <a href="{% url 'home' %}"><div class="arrow-img"></div></a>
+        </div>
+        <div class="heading-div">
+            <p class="signup-heading-1">create an account</p>
+            <p class="sub-heading">Have an account already ? <a href="{% url 'login' %}">Log in</a></p>
+        </div>
+
+        <div class="form-div-1">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div>
+                <p class="error-paragraph">{{ field.errors }}</p>
+                <input class="input-fields"
+                id="{{ field.id_for_label }}" maxlength="255"
+                name="{{ field.html_name }}" value="{{ field.intial }}" 
+                type="{{ field.field.widget.input_type }}"
+                placeholder="{{ field.label }}">
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div> 
+{% endblock content %}  

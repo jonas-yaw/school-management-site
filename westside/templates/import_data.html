@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Student{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="arrow-div">
+        <a href="{% url 'students' %}"><div class="arrow-img-1"></div></a>
+    </div>
+
+    <h1>Import Data</h1>
+    <form action="" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <label>Upload an excel file</label><br>
+    <input type="file" name="excel_file">
+    <button type="submit" value="Confirm" class="btn-primary btn-primary-wd info-btn" >Import</button>
+    </form>
+</div>
+{% endblock content %}
