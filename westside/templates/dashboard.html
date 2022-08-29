@@ -17,9 +17,18 @@
 
 
         <div class="dashboard-content">
-            <div class="graph-div"></div>
-            <div class="widget-div">
-                <a href="{% url 'students' %}"><div class="widget">Students</div></a>
+            <div class="graph-div">
+
+                <div id="graph-container" style="width: 90%;height: 20%;">
+                    <canvas id="population-chart" data-url="{% url 'population-chart' %}"></canvas>
+                </div>
+
+            </div>
+            <div class="all-widgets">
+                <div class="widget wgt-1"><a href="{% url 'students' %}">Students</a></div>
+                <div class="widget wgt-2"><a href="#">Fees</a></div>
+                <div class="widget wgt-3"><a href="#">Staff</a></div>
+                <div class="widget wgt-4"><a href="#">Class</a></div>
             </div>
         </div>
 
@@ -28,5 +37,46 @@
     <p>You are not logged in</p>
     <a href="{% url 'login' %}">Login</a> |  
 {% endif %}
+
+
+<script>
+$(function () {
+
+    var $populationChart = $("#population-chart");
+    $.ajax({
+    url: $populationChart.data("url"),
+    success: function (data) {
+
+        var ctx = $populationChart[0].getContext("2d");
+
+        new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: data.labels,
+            datasets: [{
+            backgroundColor: [
+            '#FFD700', '#FF5733', '#93C572', '#F4C430', '#D3D3D3'],
+            label: 'Enrollment',
+            data: data.data
+            }]          
+        },
+        options: {
+            responsive: true,
+            legend: {
+            position: 'top',
+            },
+            title: {
+            display: true,
+            text: 'Student Year Enrollment Chart',
+            }
+        }
+        });
+
+    }
+    });
+
+    });
+
+</script>
 
 {% endblock content %}

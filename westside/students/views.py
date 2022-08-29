@@ -15,9 +15,12 @@ from django.contrib import messages
 from django.http import HttpResponse
 from tablib import Dataset
 
+from django.db.models import Count
+from django.http import JsonResponse
+
+
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
-
 
 """ class StudentListView(ListView):
     model = Student
@@ -80,3 +83,19 @@ def simple_upload(request):
 
 
     return render(request,'import_data.html',{'form': form})
+
+
+
+def Student_population(request):
+    labels = []
+    data = []
+
+    querySet = Student.objects.values('year').annotate(class_population=Count('year')).order_by('-class_population')
+    for x in querySet:
+        labels.append('Year ' + x['year'])
+        data.append(x['class_population'])
+
+    return JsonResponse(data={
+        'labels': labels,
+        'data': data,
+    })

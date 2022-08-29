@@ -189,15 +189,33 @@ ul{
     height: 100px;
     background-color: #013988;
     color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
     font-size: 20px;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    padding: 75px;
+    padding: 45px;
     cursor: pointer;
+}
+
+.wgt-1{
+    background-color: #00BFFF ;
+}
+.wgt-2{
+    background-color: #3F00FF;
+}
+.wgt-3{
+    background-color: #0000CD !important;
+}
+.wgt-4{
+    background-color: #082567 !important;
+}
+
+.widget a{
+    color: white;
 }
 
 .top-nav p{
@@ -218,6 +236,14 @@ ul{
     text-align: right;
 }
 
+.info-btn-3{
+    background-color: #3F00FF;
+    margin: 8% 0 0 0 !important;
+}
+
+.info-btn-3 a{
+    color: white;
+}
 
 /* Table styles */
 *{
@@ -451,4 +477,23 @@ ul{
 
 .info-btn-1:hover{
     background-color:rgb(9, 214, 9)
+}
+
+.dashboard-content,.all-widgets{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.dashboard-content div{
+    width: 50%;
+}
+
+.all-widgets{
+    justify-content: center;
+    align-items: center;
+}
+
+.all-widgets div{
+    width: 30%;
+    margin: 2%;
 }
