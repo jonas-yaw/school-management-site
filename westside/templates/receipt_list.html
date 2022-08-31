@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Students{% endblock title %}
+{% block title %}Receipt{% endblock title %}
 
 {% block content %}
 <div class="dashboard-container">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="add-div">
-        <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Add Student</button></a>
+        <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Pay Fees</button></a>
     </div>
 
     <div class="table-wrapper" id="student_table_div">
@@ -20,30 +20,30 @@
                     <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Student class</th>
-                    <th>Date of Birth</th>
-                    <th>Mother Name</th>
-                    <th>Mother Contact</th>
-                    <th>Father Name</th>
-                    <th>Father Contact</th>
-                    <th>Enrollment Date</th>
+                    <th>Class</th>
+                    <th>Academic Year</th>
+                    <th>Term</th>
+                    <th>Date</th>
+                    <th>Amount paid</th>
+                    <th>Balance</th>
+                    <th>Receipient</th>
                     <th class="excludeThisClass"></th>
                     <th class="excludeThisClass"></th>
                 </tr>
             </thead>
             <tbody>
-                {% for student in objects %}
+                {% for fees in objects %}
                     <tr>
-                        <th>{{ student.student_id }}</th>
-                        <th>{{ student.first_name }}</th>
-                        <th>{{ student.last_name }}</th>
-                        <th>{{ student.student_class }}</th>
-                        <th>{{ student.date_of_birth }}</th>
-                        <th>{{ student.mother_name }}</th>
-                        <th>{{ student.mother_contact }}</th>
-                        <th>{{ student.father_name }}</th>
-                        <th>{{ student.father_contact }}</th>
-                        <th>{{ student.date_enrolled }}</th>
+                        <th>{{ fees.student_id }}</th>
+                        <th>{{ fees.first_name }}</th>
+                        <th>{{ fees.last_name }}</th>
+                        <th>{{ fees.class }}</th>
+                        <th>{{ fees.academic_year }}</th>
+                        <th>{{ fees.term }}</th>
+                        <th>{{ fees.payment_date }}</th>
+                        <th>{{ fees.amount_paid }}</th>
+                        <th>{{ fees.balance }}</th>
+                        <th>{{ fees.receipient }}</th>
                         <th class="excludeThisClass"><a href="{% url 'student_edit' student.pk %}">edit</a></th>
                         <th class="excludeThisClass"><a href="{% url 'student_delete' student.pk %}">del</a></th>
                     </tr>
