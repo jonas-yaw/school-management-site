@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Fees Catalogue{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="top-nav">
+        <h1><a href="{% url 'dashboard' %}">SURE START INTERNATIONAL SCHOOL</a></h1>
+        <p><a href="{% url 'dashboard' %}">Dashboard</a>/<a href="{% url 'fees_catalogue' %}" class="active-link">Fees Catalogue</a></p>
+    </div>
+
+    <div class="add-div">
+        <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Add Fees</button></a>
+    </div>
+
+    <div class="table-wrapper" id="student_table_div">
+        <table class="fl-table" id="table2excel">
+            <thead>
+                <tr>
+                    <th>Student Class</th>
+                    <th>Term</th>
+                    <th>Academic Year</th>
+                    <th>Total Fees</th>
+                    <th>Fee type</th>
+                    <th class="excludeThisClass"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fee in fees_catalogue_list %}
+                    <tr>
+                        <th>{{ fee.student_class }}</th>
+                        <th>{{ fee.term }}</th>
+                        <th>{{ fee.academic_year }}</th>
+                        <th>{{ fee.total_fees }}</th>
+                        <th>{{ fee.fee_type }}</th>
+                        <th class="excludeThisClass"><a href="{% url 'fees_catalogue_edit' fee.pk %}">edit</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if student_list.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ fees_list.previous_page_number }}">Previous</a></li>
+            {% endif %}
+
+            {% for i in nums %}
+	            <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+            {% endfor %}
+
+            {% if student_list.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ fees_list.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ fees_list.paginator.num_pages }}">Last &raquo</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- modal -->
+    <div class="modal">
+        <div class="modal-content student-modal-cnt">
+            <span class="close-btn">&times;</span>
+            <div class="modal-form">
+                <h2>Add Student</h2>
+                
+            <form method="post" class="payment-form">
+                {% csrf_token %}
+                <div class="inner-form-div">
+                    {% for field in form %}
+                    <div>
+                        <p class="error-paragraph">{{ field.errors }}</p>
+                        {%if field.label == 'Date of birth' %}
+                        <span>{{ field.label }}</span>
+                        {% endif %}
+                        <input
+                        id="{{ field.id_for_label }}" maxlength="255"
+                        name="{{ field.html_name }}" value="{{ field.intial }}" 
+                        type="{{ field.field.widget.input_type }}"
+                        placeholder="{{ field.label }}">
+                    </div>
+                {% endfor %}
+                </div>
+
+                <button type="submit" class="btn-primary" value="save">Submit</button>
+                
+            </form>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+{% endblock content %}

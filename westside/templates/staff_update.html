@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Staff{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="arrow-div">
+        <a href="{% url 'staff' %}"><div class="arrow-img-1"></div></a>
+    </div>
+
+    <h1>Edit post</h1>
+    <form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-primary btn-primary-wd" value="Update">Edit</button>
+    </form>
+</div>
+{% endblock content %}

@@ -12,6 +12,10 @@ from pathlib import Path
 import os 
 
 
+import django.dispatch
+
+pizza_done = django.dispatch.Signal()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,6 +38,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig', #users
     'students.apps.StudentsConfig', #students
     'fees.apps.FeesConfig', #fees 
+    'staff.apps.StaffConfig', #staff 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,9 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'import_export',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -145,5 +152,11 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://obscure-savannah-12473.herokuapp.com'
+    'https://sure-start-is.herokuapp.com'
+]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+r"^https://\w+\.domain\.com$",
 ]

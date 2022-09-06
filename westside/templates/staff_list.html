@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}Staff{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="top-nav">
+        <h1><a href="{% url 'dashboard' %}">SURE START INTERNATIONAL SCHOOL</a></h1>
+        <p><a href="{% url 'dashboard' %}">Dashboard</a>/<a href="{% url 'staff' %}" class="active-link">Staff</a></p>
+    </div>
+
+    <div class="add-div">
+        <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Add Employee</button></a>
+    </div>
+
+    <div class="table-wrapper" id="student_table_div">
+        <table class="fl-table" id="table2excel_staff">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Date of Birth</th>
+                    <th>Staff Contact</th>
+                    <th>Place of residence</th>
+                    <th>Date employed</th>
+                    <th>SSNIT Number</th>
+                    <th class="excludeThisClass"></th>
+                    <th class="excludeThisClass"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staff_list %}
+                    <tr>
+                        <th>{{ staff.staff_id }}</th>
+                        <th>{{ staff.first_name }}</th>
+                        <th>{{ staff.last_name }}</th>
+                        <th>{{ staff.role }}</th>
+                        <th>{{ staff.department }}</th>
+                        <th>{{ staff.date_of_birth }}</th>
+                        <th>{{ staff.staff_contact }}</th>
+                        <th>{{ staff.place_of_residence }}</th>
+                        <th>{{ staff.date_employed }}</th>
+                        <th>{{ staff.ssnit_number }}</th>
+                        <th class="excludeThisClass"><a href="{% url 'staff_edit' staff.pk %}">edit</a></th>
+                        <th class="excludeThisClass"><a href="{% url 'staff_delete' staff.pk %}">del</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if staff_list.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ fees_list.previous_page_number }}">Previous</a></li>
+            {% endif %}
+
+            {% for i in nums %}
+	            <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+            {% endfor %}
+
+            {% if staff_list.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ fees_list.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ fees_list.paginator.num_pages }}">Last &raquo</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <button id="btnExport_excel_staff" class="btn-primary btn-primary-wd info-btn-1">export to excel</button>
+
+
+    <!-- modal -->
+    <div class="modal">
+        <div class="modal-content student-modal-cnt">
+            <span class="close-btn">&times;</span>
+            <div class="modal-form">
+                <h2>Add Employee</h2>
+                <button class="btn-primary btn-primary-wd info-btn-3"><a href="{% url 'upload_csv' %}">Import staff</a></button>
+            <form method="post" class="payment-form">
+                {% csrf_token %}
+                <div class="inner-form-div">
+                {% for field in form %}
+                    <div>
+                        <p class="error-paragraph">{{ field.errors }}</p>
+                        {%if field.label == 'Date of birth' %}
+                        <span>{{ field.label }}</span>
+                        {% endif %}
+                        <input
+                        id="{{ field.id_for_label }}" maxlength="255"
+                        name="{{ field.html_name }}" value="{{ field.intial }}" 
+                        type="{{ field.field.widget.input_type }}"
+                        placeholder="{{ field.label }}">
+                    </div>
+                {% endfor %}
+                </div>
+
+                <button type="submit" class="btn-primary" value="save">Submit</button>
+                
+            </form>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+{% endblock content %}

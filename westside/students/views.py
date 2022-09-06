@@ -16,21 +16,17 @@ from django.http import HttpResponse
 from tablib import Dataset
 
 from django.db.models import Count
+from users.models import CustomUser
+
 from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+
+from django.core.paginator import Paginator 
 
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
-
-""" class StudentListView(ListView):
-    model = Student
-    template_name = 'student_list.html'
-
-
-class StudentCreateView(CreateView):
-    model = Student
-    template_name = 'student_list.html'
-    fields = '__all__' """
 
 
 def list_and_create(request):
@@ -40,19 +36,44 @@ def list_and_create(request):
 
     # notice this comes after saving the form to pick up new objects
     objects = Student.objects.all()
-    return render(request, 'student_list.html', {'objects': objects, 'form': form})
+
+    p = Paginator(Student.objects.all(),10)
+    page = request.GET.get('page')
+    student_list = p.get_page(page)
+
+    nums = "a" * student_list.paginator.num_pages
+
+    return render(request, 'student_list.html', {'objects': objects,
+    'student_list':student_list,
+    'nums':nums, 
+    'form': form
+    })
 
 
 class StudentUpdateView(UpdateView):
     model = Student
     template_name = 'student_update.html'
-    fields = ['first_name','last_name','year','course']
+    fields = ['first_name','last_name',
+    'student_class','date_of_birth','mother_name',
+    'mother_contact','father_name','father_contact','place_of_residence']
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user != CustomUser.objects.get(username="jonas"):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
 
 
 class StudentDeleteView(DeleteView):
     model = Student
     template_name = 'student_delete.html'
     success_url = reverse_lazy('students')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user != CustomUser.objects.get(username="jonas"):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
 
 
 def simple_upload(request):
@@ -90,9 +111,9 @@ def Student_population(request):
     labels = []
     data = []
 
-    querySet = Student.objects.values('year').annotate(class_population=Count('year')).order_by('-class_population')
+    querySet = Student.objects.values('student_class').annotate(class_population=Count('student_class')).order_by('-class_population')
     for x in querySet:
-        labels.append('Year ' + x['year'])
+        labels.append(x['student_class'])
         data.append(x['class_population'])
 
     return JsonResponse(data={

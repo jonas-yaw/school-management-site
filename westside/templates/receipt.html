@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Receipt{% endblock title %}
+
+{% block content %}
+<section class='top-sec-btn'>
+    <div>
+        <div id="homePageButton"><a href="{% url 'receipts' %}"><button class="btn-primary btn-primary-wd">Receipts</button></a></div>
+        <div><a id="printPageButton" href="#" onclick="window.print();" target="_blank"><button class="btn-primary btn-primary-wd">Print</button></a></div>
+    </div>
+</section>
+
+    <div class="print-div">
+        <div class="print-content">
+            <div class="img-logo-div">
+                <img src="../static/img/sure_start_logo_v.jpeg" alt="">
+            </div> 
+
+            <h3 class="official-receipt">OFFICIAL RECEIPT</h3>
+
+            <div class="main-table-div">
+                <table class="body-wrap">
+                    <tbody><tr>
+                        <td></td>
+                        <td class="container" width="600">
+                            <div class="content">
+                                <table class="main" width="100%" cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        <td class="content-wrap aligncenter">
+                                            <table width="100%" cellpadding="0" cellspacing="0">
+                                                <tbody><tr>
+                                                    <td class="content-block">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="content-block">
+                                                    <table class="invoice">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td><strong>Student ID: </strong>{{ objects.student_id }}<br>
+                                                                    <strong>First Name: </strong>{{ objects.first_name }}<br>
+                                                                    <strong>Last Name: </strong>{{ objects.last_name }}<br>
+                                                                    <strong>Class: </strong>{{ objects.student_class }}<br>
+                                                                </td>
+                                                                <td>
+                                                                    <strong>Academic Year: </strong>{{ objects.academic_year }}<br>
+                                                                    <strong>Term: </strong>{{ objects.term }}<br>
+                                                                    <strong>Fee Type: </strong>{{ objects.fee_type }}<br>
+                                                                    <strong>Date: </strong>{{ objects.payment_date }}<br>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="clear-padding">
+                                                                    </div>
+                                                                    <br><br>
+                                                                    <table class="invoice-items" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td>Amount Paid</td>
+                                                                            <td class="alignright">{{ objects.amount_paid }}</td>
+                                                                        </tr>
+                                                                        <tr class="total">
+                                                                            <td class="alignright" width="80%">Balance</td>
+                                                                            <td class="alignright">{{ objects.balance }}</td>
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </div> 
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody></table>  
+                
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

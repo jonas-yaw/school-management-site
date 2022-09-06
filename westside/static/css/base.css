@@ -1,9 +1,21 @@
+html{
+    box-sizing: border-box;
+    overflow-y: scroll;
+} 
+
 body{
     background-image: url(../img/school-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    overflow-y: scroll;
 }
+
+body::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
 
 a{
     text-decoration: none;
@@ -21,7 +33,7 @@ ul{
 
 .home-container{
     max-width: 80%;
-    height: 100%;
+    height: 90%;
     margin: 0 auto;
     display: flex;
     flex-flow: column;
@@ -31,11 +43,16 @@ ul{
 
 .home-container h1{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 10%;
 }
 
 .btn-group{
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-flow:row wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-group button{
@@ -117,7 +134,7 @@ ul{
     color: white;
     font-size: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 5%;
+    margin-top: 3%;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.7s ease-in-out;
@@ -229,7 +246,7 @@ ul{
 }
 
 .btn-primary-wd{
-    margin: 2% 0 3% 0 !important;
+    margin: 0% 0 1% 0 !important;
 }
 
 .add-div{
@@ -381,7 +398,7 @@ ul{
 .modal {
     display: none; 
     position: fixed; 
-    padding-top: 50px;
+    padding-top: 30px;
     left: 0; 
     top: 0;
     width: 100%;
@@ -393,7 +410,7 @@ ul{
     position: relative; 
     background-color: white; 
     /* backdrop-filter: blur(5px); */
-    padding: 40px; 
+    padding: 35px; 
     margin: auto; 
     width: 35%;  
     -webkit-animation-name: animatetop;
@@ -410,6 +427,10 @@ ul{
     font-weight: bold;
     cursor: pointer;
     transition: 0.5s;
+  }
+
+  .student-modal-cnt{
+    width: 50%;
   }
 
   .close-btn:hover {
@@ -431,7 +452,7 @@ ul{
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 
@@ -439,7 +460,7 @@ ul{
     padding: 1%;
     border: 1px solid black;
     font-size: 18px;
-    margin-bottom: 0%;
+    margin: 2%;
 }
 
 .payment-form input:focus{
@@ -456,10 +477,27 @@ ul{
     text-align: center;
 }
 
+.inner-form-div{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-form-div div {
+    margin: 1%;
+}
+
+.btn-margin-div{
+    border: 1px solid red;
+    display: block;
+}
+
+
 .modal-form h2{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
     text-align: center;
 }
 
@@ -496,4 +534,118 @@ ul{
 .all-widgets div{
     width: 30%;
     margin: 2%;
+}
+
+
+.print-content{
+    height: 80%;
+    max-width: 70%;
+    margin: 0 auto;
+    background-color: white;
+    margin-top: 3%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.img-logo-div{
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 3%;
+}
+
+.img-logo-div img{
+    width: 100%;
+    height: 75px;
+}
+
+.receipt-table{
+    width: 100%;
+    margin-top: 50%;
+}
+
+
+/* -------------------------------------
+    INVOICE
+    Styles for the billing table
+------------------------------------- */
+.invoice {
+    margin-top: 1px;
+    text-align: left;
+    width: 100%;
+}
+.invoice td {
+    padding: 4px 0;
+}
+.invoice .invoice-items {
+    width: 100%;
+}
+.invoice .invoice-items td {
+    border-top: #eee 1px solid;
+}
+.invoice .invoice-items .total td {
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    font-weight: 700;
+}
+
+.top-sec-btn {
+    margin: 1% 0 1% 0;
+}
+
+.top-sec-btn div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.main-table-div{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-wrap{
+    margin-top: 5%;
+    width: 90%;
+}
+
+.official-receipt{
+    margin-top: 5%;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+
+@media print {
+    #homePageButton {
+      display: none;
+    }
+  }
+
+  @media print {
+    #printPageButton {
+      display: none;
+    }
+  }
+
+
+#btnExport_excel_fees {
+    margin-bottom: 40% !important;
+}
+
+footer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+} 
+
+footer p{
+    text-align: center;
+    color: #324960;
+    font-weight: bold;
 }

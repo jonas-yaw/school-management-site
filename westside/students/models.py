@@ -6,12 +6,13 @@ class Student(models.Model):
     student_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=255, blank=True)
     last_name = models.CharField(max_length=255, blank=True)
-    student_class = models.CharField(max_length=5, blank=True)
+    student_class = models.CharField(max_length=50, blank=True)
     date_of_birth = models.DateField()
     mother_name = models.CharField(max_length=255, blank=True)
     mother_contact = models.CharField(max_length=255, blank=True)
     father_name = models.CharField(max_length=255, blank=True)
     father_contact = models.CharField(max_length=255, blank=True)
+    place_of_residence = models.CharField(max_length=255, blank=True)
     date_enrolled = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
@@ -20,4 +21,7 @@ class Student(models.Model):
 
     def get_absolute_url(self): 
         return reverse('students')
+
+    class Meta:
+        ordering = ['-date_enrolled']
 

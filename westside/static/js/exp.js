@@ -18,6 +18,37 @@
   });
 
 
+  $("#btnExport_excel_fees").click(function() {
+    let today = new Date()
+
+    var nameformat = today.toISOString().substring(0, 13)
+      
+    $('#table2excel_fees').table2excel({
+      // exclude CSS class
+      exclude: ".excludeThisClass",
+      name: "Worksheet Name",
+      filename: "receipt_list_" + nameformat, //do not include extension
+      fileext: ".xlsx" // file extension
+      }); 
+
+  });
+
+
+  $("#btnExport_excel_staff").click(function() {
+    let today = new Date()
+
+    var nameformat = today.toISOString().substring(0, 13)
+      
+    $('#table2excel_staff').table2excel({
+      // exclude CSS class
+      exclude: ".excludeThisClass",
+      name: "Worksheet Name",
+      filename: "staff_list_" + nameformat, //do not include extension
+      fileext: ".xlsx" // file extension
+      }); 
+
+  });
+
 
   $("#btnExport_pdf").click(function() {
     var pdf = new jsPDF('p', 'pt', 'letter');

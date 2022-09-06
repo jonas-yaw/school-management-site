@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Fees Catalogue Delete{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="arrow-div">
+        <a href="{% url 'fees_catalogue %}"><div class="arrow-img-1"></div></a>
+    </div>
+
+    <h1>Delete Class Fees</h1>
+    <form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ fees_catalogue.first_name }}"?</p>
+    <br>
+    <button type="submit" value="Confirm" class="btn-primary btn-primary-wd warning-btn" >Confirm</button>
+    </form>
+</div>
+{% endblock content %}

@@ -7,7 +7,7 @@
 {% if user.is_authenticated %}
     <div class="dashboard-container">
         <div class="top-nav">
-        <h1><a href="{% url 'dashboard' %}">WESTSIDE SCHOOL</a></h1>
+        <h1><a href="{% url 'dashboard' %}">SURE START INTERNATIONAL SCHOOL</a></h1>
         <p><a href="{% url 'dashboard' %}">Dashboard</a></p>
         </div>
         <div class="top-header">
@@ -26,9 +26,9 @@
             </div>
             <div class="all-widgets">
                 <div class="widget wgt-1"><a href="{% url 'students' %}">Students</a></div>
-                <div class="widget wgt-2"><a href="#">Fees</a></div>
-                <div class="widget wgt-3"><a href="#">Staff</a></div>
-                <div class="widget wgt-4"><a href="#">Class</a></div>
+                <div class="widget wgt-2"><a href="{% url 'receipts' %}">Receipts</a></div>
+                <div class="widget wgt-3"><a href="{% url 'staff' %}">Staff</a></div>
+                <div class="widget wgt-4"><a href="{% url 'fees_catalogue' %}">Fees</a></div>
             </div>
         </div>
 
