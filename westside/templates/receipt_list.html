@@ -28,6 +28,7 @@
                     <th>Amount paid</th>
                     <th>Balance</th>
                     <th>Receipient</th>
+                    <th class="excludeThisClass"></th>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,7 @@
                         <th>{{ fees.amount_paid }}</th>
                         <th>{{ fees.balance }}</th>
                         <th>{{ fees.receipient }}</th>
+                        <th class="excludeThisClass"><a href="{% url 'receipt_delete' fees.pk %}">del</a></th>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -98,4 +100,5 @@
     </div>
     
 </div>
+
 {% endblock content %}

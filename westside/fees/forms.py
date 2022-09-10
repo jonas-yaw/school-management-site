@@ -35,3 +35,6 @@ class FeesCatalogueForm(forms.ModelForm):
     class Meta:
         model = FeesCatalogue
         fields = ('student_class','term','academic_year','total_fees','fee_type')
+
+
+

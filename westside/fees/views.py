@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse,reverse_lazy
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
+
 #data pagination modules 
 from django.core.paginator import Paginator 
 
@@ -17,25 +18,33 @@ def receipts_list_and_create(request):
     if request.method == 'POST' and form.is_valid():
         instance = form.save(commit=False)
 
-        querySet = Student.objects.filter(student_id=instance.student_id,first_name=instance.first_name,last_name=instance.last_name)
+        querySet = Student.objects.filter(student_id__iexact=instance.student_id,
+        first_name__iexact=instance.first_name,
+        last_name__iexact=instance.last_name)
         
-        if querySet is not None:  
+        #print(querySet)
+        if querySet:  
             print('Student validated')      
             def get_balance():
-                return Receipt.objects.filter(student_id=instance.student_id,
-                student_class=instance.student_class ,
-                academic_year=instance.academic_year,
-                fee_type = instance.fee_type ,
-                term =instance.term)[:1]
+                return Receipt.objects.filter(
+                student_id__iexact=instance.student_id,
+                student_class__iexact=instance.student_class ,
+                academic_year__iexact=instance.academic_year,
+                fee_type__iexact = instance.fee_type ,
+                term__iexact =instance.term)[:1]
             
             def get_default_balance():
-                return FeesCatalogue.objects.filter(student_class=instance.student_class ,
-                academic_year=instance.academic_year,
-                term =instance.term,
-                fee_type = instance.fee_type
+                return FeesCatalogue.objects.filter(
+                student_class__iexact=instance.student_class ,
+                academic_year__iexact=instance.academic_year,
+                term__iexact =instance.term,
+                fee_type__iexact = instance.fee_type
                 )
     
+            previous_balance = 0 
+            
             balance_result_1 = get_balance()
+            #print(balance_result_1)
             for x in balance_result_1:
                 previous_balance = x.balance
 
@@ -45,7 +54,7 @@ def receipts_list_and_create(request):
             for y in balance_result_2:
                 default_balance = y.total_fees
 
-            if not balance_result_1:
+            if not balance_result_1 and default_balance > 0:
                 instance.balance = default_balance - instance.amount_paid 
             else:
                 instance.balance = previous_balance - instance.amount_paid 
@@ -55,8 +64,12 @@ def receipts_list_and_create(request):
             instance.save()
 
 
-            url = reverse('dashboard')
-            return render(request, 'receipt.html', {'objects': instance})
+            message = 'Payment Successful'
+            return render(request, 'receipt.html', {'objects': instance,'message':message})
+        else:
+            print('Not a Student')
+            message = 'Not a Student'
+            return render(request,'receipt.html', {'message':message})
         
 
 
@@ -75,6 +88,17 @@ def receipts_list_and_create(request):
     'nums':nums, 
     'form': form
     })
+
+
+class ReceiptDeleteView(LoginRequiredMixin,DeleteView):
+    model = Receipt
+    template_name = 'receipt_delete.html'
+    success_url = reverse_lazy('receipts')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user != CustomUser.objects.get(username="admin"):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 
 
@@ -103,7 +127,7 @@ class FeesCatalogueUpdateView(LoginRequiredMixin,UpdateView):
     fields = ['student_class','term','academic_year','total_fees','fee_type']
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user != CustomUser.objects.get(username="jonas"):
+        if self.request.user != CustomUser.objects.get(username="admin"):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
 
@@ -114,6 +138,6 @@ class FeesCatalogueDeleteView(LoginRequiredMixin,DeleteView):
     success_url = reverse_lazy('fees_catalogue')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user != CustomUser.objects.get(username="jonas"):
+        if self.request.user != CustomUser.objects.get(username="admin"):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)

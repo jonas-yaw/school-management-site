@@ -5,7 +5,7 @@ from django.views.generic import TemplateView,ListView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 from django.shortcuts import render
-from .forms import StudentCreationForm,CsvImportForm
+from .forms import StudentCreationForm,CsvImportForm,SearchForm
 from .models import Student
 from django.urls import reverse_lazy
 
@@ -34,6 +34,16 @@ def list_and_create(request):
     if request.method == 'POST' and form.is_valid():
         form.save()
 
+    
+    search_form = SearchForm(request.POST or None)
+    if request.method == 'POST' and search_form.is_valid():
+        instance = search_form.save(commit=False)
+        
+        searched_students = Student.objects.filter(first_name__contains=instance.first_name)
+        instance.save()
+
+        return render(request, 'student_list_search.html', {'searched_students': searched_students})
+
     # notice this comes after saving the form to pick up new objects
     objects = Student.objects.all()
 
@@ -46,7 +56,8 @@ def list_and_create(request):
     return render(request, 'student_list.html', {'objects': objects,
     'student_list':student_list,
     'nums':nums, 
-    'form': form
+    'form': form,
+    'search_form':search_form
     })
 
 
@@ -58,7 +69,7 @@ class StudentUpdateView(UpdateView):
     'mother_contact','father_name','father_contact','place_of_residence']
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user != CustomUser.objects.get(username="jonas"):
+        if self.request.user != CustomUser.objects.get(username="admin"):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
 
@@ -70,7 +81,7 @@ class StudentDeleteView(DeleteView):
     success_url = reverse_lazy('students')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user != CustomUser.objects.get(username="jonas"):
+        if self.request.user != CustomUser.objects.get(username="admin"):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
 
@@ -104,6 +115,7 @@ def simple_upload(request):
 
 
     return render(request,'import_data.html',{'form': form})
+
 
 
 

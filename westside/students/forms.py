@@ -24,3 +24,6 @@ class StudentCreationForm(forms.ModelForm):
 
 class CsvImportForm(forms.Form):
     excel_upload = forms.FileField()
+
+class SearchForm(forms.Form):
+    student_name = forms.CharField(max_length=255)

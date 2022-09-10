@@ -250,8 +250,18 @@ ul{
 }
 
 .add-div{
-    text-align: right;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
 }
+
+.add-div a {
+    margin-left: 3%;
+}
+
+
 
 .info-btn-3{
     background-color: #3F00FF;
@@ -282,11 +292,22 @@ ul{
     padding: 30px 0;
 }
 
+.primary-1{
+    background-color: #E5AA70;
+}
+
+.primary-1:hover{
+    background-color: #E97451;
+}
+
 /* Table Styles */
 
 .table-wrapper{
-    margin: 10px 70px 70px;
+    margin: 10px 0px 20px 0px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .fl-table {
@@ -299,6 +320,7 @@ ul{
     max-width: 100%;
     white-space: nowrap;
     background-color: white;
+    text-transform: capitalize;
 }
 
 .fl-table td, .fl-table th {
@@ -634,6 +656,17 @@ ul{
 
 #btnExport_excel_fees {
     margin-bottom: 40% !important;
+}
+
+.top-buttons-div{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: 3% 0 3% 0;
+}
+
+.top-buttons-div div{
+    width: 40%;
 }
 
 footer {

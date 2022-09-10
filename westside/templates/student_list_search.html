@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Students{% endblock title %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="top-nav">
+        <h1><a href="{% url 'dashboard' %}">SURE START INTERNATIONAL SCHOOL</a></h1>
+        <p><a href="{% url 'dashboard' %}">Dashboard</a>/<a href="{% url 'students' %}" class="active-link">Students</a></p>
+    </div>
+
+
+    {% if searched_students %}
+
+    <div class="table-wrapper" id="student_table_div">
+        <table class="fl-table" id="table2excel">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Student class</th>
+                    <th>Date of Birth</th>
+                    <th>Mother Name</th>
+                    <th>Mother Contact</th>
+                    <th>Father Name</th>
+                    <th>Father Contact</th>
+                    <th>Place of residence</th>
+                    <th>Enrollment Date</th>
+                    <th class="excludeThisClass"></th>
+                    <th class="excludeThisClass"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in searched_students %}
+                    <tr>
+                        <th>{{ student.student_id }}</th>
+                        <th>{{ student.first_name }}</th>
+                        <th>{{ student.last_name }}</th>
+                        <th>{{ student.student_class }}</th>
+                        <th>{{ student.date_of_birth }}</th>
+                        <th>{{ student.mother_name }}</th>
+                        <th>{{ student.mother_contact }}</th>
+                        <th>{{ student.father_name }}</th>
+                        <th>{{ student.father_contact }}</th>
+                        <th>{{ student.place_of_residence }}</th>
+                        <th>{{ student.date_enrolled }}</th>
+                        <th class="excludeThisClass"><a href="{% url 'student_edit' student.pk %}">edit</a></th>
+                        <th class="excludeThisClass"><a href="{% url 'student_delete' student.pk %}">del</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No search results.</p>
+    {% endif %}
+
+
+</div>
+{% endblock content %}

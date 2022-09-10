@@ -36,7 +36,7 @@ class StaffUpdateView(UpdateView):
     'role','department','date_of_birth','staff_contact','place_of_residence','ssnit_number']
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user != CustomUser.objects.get(username="jonas"):
+        if self.request.user != CustomUser.objects.get(username="admin"):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
 
@@ -48,6 +48,6 @@ class StaffDeleteView(DeleteView):
     success_url = reverse_lazy('staff')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user != CustomUser.objects.get(username="jonas"):
+        if self.request.user != CustomUser.objects.get(username="admin"):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
