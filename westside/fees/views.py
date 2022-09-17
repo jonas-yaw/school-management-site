@@ -8,6 +8,7 @@ from users.models import CustomUser
 from django.http import HttpResponseRedirect
 from django.urls import reverse,reverse_lazy
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from students.forms import SearchForm
 
 
 #data pagination modules 
@@ -82,11 +83,29 @@ def receipts_list_and_create(request):
 
     nums = "a" * fees_list.paginator.num_pages
 
+    search_form = SearchForm(request.GET or None)
+    if request.method == 'GET' and search_form.is_valid():
+        student_name = request.GET['student_name']
+        print(student_name)
+
+        searched_students = Receipt.objects.filter(first_name__icontains=student_name) | Receipt.objects.filter(last_name__icontains=student_name)
+
+        pagn = Paginator(searched_students.all(),10)
+        page1 = request.GET.get('page')
+        searched_receipts = pagn.get_page(page1)
+
+        numbs = "a" * searched_receipts.paginator.num_pages
+        return render(request, 'receipt_list_search.html', {
+        'searched_receipts': searched_receipts,
+        'numbs':numbs
+        })
+
 
     return render(request, 'receipt_list.html', {'objects': objects,
     'fees_list':fees_list,
     'nums':nums, 
-    'form': form
+    'form': form,
+    'search_form': search_form
     })
 
 

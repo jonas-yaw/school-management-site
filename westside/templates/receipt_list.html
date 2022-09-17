@@ -9,9 +9,26 @@
         <p><a href="{% url 'dashboard' %}">Dashboard</a>/<a href="{% url 'receipts' %}" class="active-link">Receipts</a></p>
     </div>
 
-    <div class="add-div">
-        <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Pay Fees</button></a>
+    <div class="top-buttons-div">
+        <div>
+            <form action="" method="get">
+                {% csrf_token %}
+                {% for field in search_form %}
+                    <p class="error-paragraph">{{ field.errors }}</p>
+                    <input
+                    id="{{ field.id_for_label }}" maxlength="255"
+                    name="{{ field.html_name }}" value="{{ field.intial }}" 
+                    type="{{ field.field.widget.input_type }}"
+                    placeholder="{{ field.label }}">
+                {% endfor %}
+                <button type="submit" class="btn-primary primary-1" value="save" name="search">Search</button>
+            </form>
+        </div>  
+        <div class="add-div">
+            <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Pay Fees</button></a>
+        </div>
     </div>
+
 
     <div class="table-wrapper" id="student_table_div">
         <table class="fl-table" id="table2excel_fees">

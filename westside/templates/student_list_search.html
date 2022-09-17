@@ -9,10 +9,12 @@
         <p><a href="{% url 'dashboard' %}">Dashboard</a>/<a href="{% url 'students' %}" class="active-link">Students</a></p>
     </div>
 
-
+    <div class="arrow-div">
+        <a href="{% url 'students' %}"><div class="arrow-img-1"></div></a>
+    </div>
     {% if searched_students %}
 
-    <div class="table-wrapper" id="student_table_div">
+    <div class="table-wrapper searched_div" id="student_table_div">
         <table class="fl-table" id="table2excel">
             <thead>
                 <tr>
@@ -51,9 +53,29 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if searched_students.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ searched_students.previous_page_number }}">Previous</a></li>
+                {% endif %}
+    
+                {% for i in numbs %}
+                    <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                {% endfor %}
+    
+                {% if searched_students.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ searched_students.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ searched_students.paginator.num_pages }}">Last &raquo</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
     {% else %}
+    <div class="container search-div">
         <p>No search results.</p>
+    </div>
     {% endif %}
 
 

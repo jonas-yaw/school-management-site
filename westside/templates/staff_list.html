@@ -57,7 +57,7 @@
         <ul class="pagination justify-content-center">
             {% if staff_list.has_previous %}
             <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ fees_list.previous_page_number }}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ staff_list.previous_page_number }}">Previous</a></li>
             {% endif %}
 
             {% for i in nums %}
@@ -65,8 +65,8 @@
             {% endfor %}
 
             {% if staff_list.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ fees_list.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ fees_list.paginator.num_pages }}">Last &raquo</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ staff_list.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ staff_list.paginator.num_pages }}">Last &raquo</a></li>
             {% endif %}
         </ul>
     </nav>

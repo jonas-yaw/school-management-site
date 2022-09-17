@@ -13,7 +13,7 @@ class Student(models.Model):
     father_name = models.CharField(max_length=255, blank=True)
     father_contact = models.CharField(max_length=255, blank=True)
     place_of_residence = models.CharField(max_length=255, blank=True)
-    date_enrolled = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    date_enrolled = models.DateField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return self.first_name 

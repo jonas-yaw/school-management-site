@@ -669,6 +669,22 @@ ul{
     width: 40%;
 }
 
+.search-div{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.search-div p {
+    font-size: 30px;
+}
+
+.searched_div{
+    margin-top: 4%;
+}
+
 footer {
     display: flex;
     flex-flow: row wrap;

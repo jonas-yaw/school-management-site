@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='feescatalogue',
             name='fee_type',
-            field=models.CharField(default=django.utils.timezone.now, max_length=20),
+            field=models.CharField(default=django.utils.timezone.now, max_length=50),
             preserve_default=False,
         ),
     ]

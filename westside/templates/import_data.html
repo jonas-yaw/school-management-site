@@ -9,10 +9,22 @@
     </div>
 
     <h1>Import Data</h1>
+    <p>{{ info }}</p>
     <form action="" method="post" enctype="multipart/form-data" >
     {% csrf_token %}
     <label>Upload an excel file</label><br>
-    <input type="file" name="excel_file">
+    {% for field in form %}
+        <p class="error-paragraph">{{ field.errors }}</p>
+        {%if field.label == 'Date of birth' %}
+        <span>{{ field.label }}</span>
+        {% endif %}
+        <input
+        id="{{ field.id_for_label }}" maxlength="255"
+        name="{{ field.html_name }}" value="{{ field.intial }}" 
+        type="{{ field.field.widget.input_type }}"
+        placeholder="{{ field.label }}">
+
+    {% endfor %}
     <button type="submit" value="Confirm" class="btn-primary btn-primary-wd info-btn" >Import</button>
     </form>
 </div>

@@ -10,8 +10,8 @@
     </div>
 
     <div class="top-buttons-div">
-     <div>
-            <form action="" method="post">
+        <div>
+            <form action="" method="get">
                 {% csrf_token %}
                 {% for field in search_form %}
                     <p class="error-paragraph">{{ field.errors }}</p>
@@ -23,7 +23,7 @@
                 {% endfor %}
                 <button type="submit" class="btn-primary primary-1" value="save" name="search">Search</button>
             </form>
-        </div> 
+        </div>  
         <div class="add-div">
             <a href="#" id="modal-btn"><button class="btn-primary btn-primary-wd">Add Student</button></a>
             <a href="{% url 'upload_csv' %}"><button class="btn-primary btn-primary-wd">Import students</button></a>
@@ -57,13 +57,13 @@
                         <th>{{ student.first_name }}</th>
                         <th>{{ student.last_name }}</th>
                         <th>{{ student.student_class }}</th>
-                        <th>{{ student.date_of_birth }}</th>
+                        <th>{{ student.date_of_birth|date:"Y-m-d" }}</th>
                         <th>{{ student.mother_name }}</th>
                         <th>{{ student.mother_contact }}</th>
                         <th>{{ student.father_name }}</th>
                         <th>{{ student.father_contact }}</th>
                         <th>{{ student.place_of_residence }}</th>
-                        <th>{{ student.date_enrolled }}</th>
+                        <th>{{ student.date_enrolled|date:"Y-m-d" }}</th>
                         <th class="excludeThisClass"><a href="{% url 'student_edit' student.pk %}">edit</a></th>
                         <th class="excludeThisClass"><a href="{% url 'student_delete' student.pk %}">del</a></th>
                     </tr>
@@ -77,7 +77,7 @@
         <ul class="pagination justify-content-center">
             {% if student_list.has_previous %}
             <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ fees_list.previous_page_number }}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ student_list.previous_page_number }}">Previous</a></li>
             {% endif %}
 
             {% for i in nums %}
@@ -85,8 +85,8 @@
             {% endfor %}
 
             {% if student_list.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ fees_list.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ fees_list.paginator.num_pages }}">Last &raquo</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ student_list.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ student_list.paginator.num_pages }}">Last &raquo</a></li>
             {% endif %}
         </ul>
     </nav>

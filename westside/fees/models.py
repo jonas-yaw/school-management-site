@@ -7,8 +7,8 @@ class Receipt(models.Model):
     student_id = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    student_class = models.CharField(max_length=20)
-    fee_type = models.CharField(max_length=20)
+    student_class = models.CharField(max_length=50)
+    fee_type = models.CharField(max_length=50)
     balance = models.FloatField(max_length=255)
     amount_paid = models.FloatField(max_length=255 ,default=0)
     academic_year = models.CharField(max_length=20)
@@ -30,11 +30,11 @@ class Receipt(models.Model):
 
 
 class FeesCatalogue(models.Model):
-    student_class = models.CharField(max_length=20)
+    student_class = models.CharField(max_length=50)
     term = models.CharField(max_length=5)
-    academic_year = models.CharField(max_length=20)
+    academic_year = models.CharField(max_length=50)
     total_fees  = models.FloatField(max_length=255)
-    fee_type = models.CharField(max_length=20)
+    fee_type = models.CharField(max_length=50)
 
     def __str__(self):
         return self.student_class 

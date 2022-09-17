@@ -8,16 +8,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from email.policy import default
 from pathlib import Path
 import os 
 
 
 import django.dispatch
+import dj_database_url
+import dotenv
 
 pizza_done = django.dispatch.Signal()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 
 # Quick-start development settings - unsuitable for production
@@ -85,13 +92,35 @@ WSGI_APPLICATION = 'westside.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+""" ON_HEROKU = os.environ.get('ON_HEROKU')
+HEROKU_SERVER = os.environ.get('HEROKU_SERVER')
+
+if ON_HEROKU:
+    DATABASE_URL = 'postgresql://<postgresql>'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)} """
+
+#FOR PRODUCTION ONLY
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default' : {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd9bvh0f5h0p8e2',
+        'USER': 'fkvpsgylccfxai' ,
+        'PASSWORD': 'ac1ba4c6bce3b1532b5b43cfa7027fe5807fdb05d3008be9b5d9b7e48493020e',
+        'HOST': 'ec2-107-23-76-12.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
+ 
+""" DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
+} """
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -152,7 +181,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://sure-start-is.herokuapp.com'
+    'https://sure-start-intl.herokuapp.com'
 ]
 
 
@@ -160,3 +189,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGIN_REGEXES = [
 r"^https://\w+\.domain\.com$",
 ]
+
+#options = DATABASES['default'].get('OPTIONS', {})
+#options.pop('sslmode', None)
